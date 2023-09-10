@@ -1,16 +1,18 @@
-﻿using EsportsReplayManager.Modules.FileSystem;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using EsportsReplayManager.Modules.FileSystem;
+using EsportsReplayManager.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace EsportsReplayManager
 {
     public partial class MainPage : ContentPage
     {
-        private readonly IFileSystemService _fileSystemService;
         int count = 0;
 
-        public MainPage(IFileSystemService fileSystemService)
+        public MainPage(MainPageViewModel vm)
         {
             InitializeComponent();
-            _fileSystemService = fileSystemService;
+            BindingContext = vm;
         }
 
         private void OnCounterClicked(object sender, EventArgs e)
@@ -23,11 +25,6 @@ namespace EsportsReplayManager
                 CounterBtn.Text = $"Clicked {count} times";
 
             SemanticScreenReader.Announce(CounterBtn.Text);
-        }
-
-        private void OnGetReplaysButtonClicked(object sender, EventArgs e)
-        {
-            _fileSystemService.GetReplaysFromDisk();
         }
     }
 }

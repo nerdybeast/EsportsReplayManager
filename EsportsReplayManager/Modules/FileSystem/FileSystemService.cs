@@ -8,10 +8,11 @@ namespace EsportsReplayManager.Modules.FileSystem;
 
 internal class FileSystemService : IFileSystemService
 {
-    public IEnumerable<string> GetReplaysFromDisk()
+    public async Task<List<string>> GetReplaysFromDisk()
     {
         const string replayFolder = "C:\\Users\\Micha\\OneDrive\\Documents\\My Games\\Rocket League\\TAGame\\Demos";
-        IEnumerable<string> replayNames = Directory.EnumerateFiles(replayFolder);
-        return replayNames;
+        List<string> fullyQualifiedReplayFileNames = new(Directory.EnumerateFiles(replayFolder));
+        await Task.Delay(5000);
+        return await Task.FromResult(fullyQualifiedReplayFileNames);
     }
 }

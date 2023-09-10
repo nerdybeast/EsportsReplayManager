@@ -8,5 +8,5 @@ namespace EsportsReplayManager.Modules.FileSystem;
 
 public interface IFileSystemService
 {
-    IEnumerable<string> GetReplaysFromDisk();
+    Task<List<string>> GetReplaysFromDisk();
 }

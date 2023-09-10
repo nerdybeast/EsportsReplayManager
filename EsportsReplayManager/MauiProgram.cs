@@ -1,4 +1,6 @@
 ﻿using EsportsReplayManager.Modules.FileSystem;
+using EsportsReplayManager.Pages;
+using EsportsReplayManager.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace EsportsReplayManager
@@ -9,7 +11,12 @@ namespace EsportsReplayManager
         {
             var builder = MauiApp.CreateBuilder();
 
+            //Only need a single instance of the splash page
+            builder.Services.AddSingleton<SplashPage>();
+            builder.Services.AddSingleton<SplashPageVM>();
+
             builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddSingleton<IFileSystemService, FileSystemService>();
 
             builder
